@@ -1,22 +1,13 @@
-local noclip = false
-local buttonNoclip = Instance.new("TextButton")
-buttonNoclip.Text = "نقل خلال الجدران"
-buttonNoclip.Size = UDim2.new(1, -10, 0, 35)
-buttonNoclip.Position = UDim2.new(0, 5, 0, 90)
-buttonNoclip.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
-buttonNoclip.TextColor3 = Color3.new(1,1,1)
-buttonNoclip.Parent = SidePanel
+local jumpButton = Instance.new("TextButton")
+jumpButton.Text = "نط عالي"
+jumpButton.Size = UDim2.new(1, -10, 0, 35)
+jumpButton.Position = UDim2.new(0, 5, 0, 100)
+jumpButton.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
+jumpButton.TextColor3 = Color3.new(1,1,1)
+jumpButton.Font = Enum.Font.Gotham
+jumpButton.TextSize = 14
+jumpButton.Parent = SidePanel
 
-buttonNoclip.MouseButton1Click:Connect(function()
-    noclip = not noclip
-end)
-
-game:GetService("RunService").Stepped:Connect(function()
-    if noclip then
-        for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = false
-            end
-        end
-    end
+jumpButton.MouseButton1Click:Connect(function()
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 150
 end)
