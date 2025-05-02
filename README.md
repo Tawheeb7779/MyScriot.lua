@@ -1,12 +1,22 @@
-local buttonSpeed = Instance.new("TextButton")
-buttonSpeed.Text = "سرعة"
-buttonSpeed.Size = UDim2.new(1, -10, 0, 35)
-buttonSpeed.Position = UDim2.new(0, 5, 0, 50)
-buttonSpeed.BackgroundColor3 = Color3.fromRGB(0, 120, 200)
-buttonSpeed.TextColor3 = Color3.new(1,1,1)
-buttonSpeed.Parent = SidePanel
+local noclip = false
+local buttonNoclip = Instance.new("TextButton")
+buttonNoclip.Text = "نقل خلال الجدران"
+buttonNoclip.Size = UDim2.new(1, -10, 0, 35)
+buttonNoclip.Position = UDim2.new(0, 5, 0, 90)
+buttonNoclip.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
+buttonNoclip.TextColor3 = Color3.new(1,1,1)
+buttonNoclip.Parent = SidePanel
 
-buttonSpeed.MouseButton1Click:Connect(function()
-    local hum = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-    if hum then hum.WalkSpeed = 100 end
+buttonNoclip.MouseButton1Click:Connect(function()
+    noclip = not noclip
+end)
+
+game:GetService("RunService").Stepped:Connect(function()
+    if noclip then
+        for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+    end
 end)
